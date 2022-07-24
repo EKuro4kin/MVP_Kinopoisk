@@ -7,7 +7,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class BaseConfig:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'you-will-never-guess')
+    SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
+    ALGORITHM = 'HS256'
     JSON_AS_ASCII = False
 
     ITEMS_PER_PAGE = 12
@@ -55,4 +56,4 @@ class ConfigFactory:
         raise NotImplementedError
 
 
-config = ConfigFactory.get_config()
+# config = ConfigFactory.get_config()

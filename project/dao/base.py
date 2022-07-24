@@ -8,7 +8,7 @@ from project.setup.db.models import Base
 
 T = TypeVar('T', bound=Base)
 
-
+#Базовый класс, от которого будут наследоваться остальные создаваемые классы (жанров, рижесеров, пользователей и фильмов)
 class BaseDAO(Generic[T]):
     __model__ = Base
 
@@ -19,9 +19,11 @@ class BaseDAO(Generic[T]):
     def _items_per_page(self) -> int:
         return current_app.config['ITEMS_PER_PAGE']
 
+#Метод который выводит(возвращает) сущность по идентификатору (айди)
     def get_by_id(self, pk: int) -> Optional[T]:
         return self._db_session.query(self.__model__).get(pk)
 
+# Метод который выводит(возвращает) все сущности нужного класса (находящиеся в базе данных(таблице))
     def get_all(self, page: Optional[int] = None) -> List[T]:
         stmt: BaseQuery = self._db_session.query(self.__model__)
         if page:
